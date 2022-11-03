@@ -1,23 +1,13 @@
-/****************************************************************************
- * @author Josaphat Mayuba Ndele	et Andres Garcia Cotton					*					*
- * Les programmes permet a faire de dessin de forme rectanglulaire et 		*
- * les ellipses	on peut l'enregistre et ouvrir le meme fichier.				*											*
- * 																			*
- ****************************************************************************/
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Rectangle2D;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -27,7 +17,6 @@ import java.io.ObjectOutputStream;
 import javax.swing.ButtonGroup;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -37,22 +26,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
-
-public class DessinTest2 {
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				DessinFrame application = new DessinFrame("paint drawing");
-				application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-				application.setSize(800, 600);
-				application.setVisible(true);
-
-			}
-		});
-	}
-}
 
 /**
  * 
@@ -291,39 +264,4 @@ class DessinFrame extends JFrame {
 	public static final int DEFAULT_WIDTH = 300;
 	public static final int DEFAULT_HEIGHT = 400;
 
-}
-
-/**
- * 
- * @param ColorComponent
- *            Pallette de couleur
- */
-
-class ColorComponent extends JComponent {
-	private Color c;
-	private Rectangle2D rect;
-
-	public ColorComponent(Color c) {
-		super();
-		this.c = c;
-		this.rect = new Rectangle2D.Double(5, 5, 15, 15);
-		this.setPreferredSize(new Dimension(20, 20));
-		this.setMaximumSize(new Dimension(25, 25));
-	}
-
-	public void paintComponent(Graphics g) {
-		Graphics2D g2 = (Graphics2D) g;
-		g2.setPaint(c);
-		g2.fill(rect);
-
-	}
-
-	public Color getColor() {
-		return c;
-	}
-
-	public void setColor(Color c) {
-		this.c = c;
-		repaint();
-	}
 }
