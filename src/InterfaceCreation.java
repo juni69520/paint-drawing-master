@@ -36,7 +36,7 @@ import javax.swing.KeyStroke;
  *            le panneau qui permet a faire le dessin
  */
 class DessinFrame extends JFrame {
-	private DessinPanel2 PanelDesign;
+	private DessinPanel PanelDesign;
 	private ColorComponent couleur;
 
 	public DessinFrame(String titre) {
@@ -44,7 +44,7 @@ class DessinFrame extends JFrame {
 		
 		
 		// PANNEAU DE DESSIN
-		PanelDesign = new DessinPanel2();
+		PanelDesign = new DessinPanel();
 		PanelDesign.setCouleur(Color.BLACK);
 		PanelDesign.setBackground(Color.WHITE);
 		this.add(PanelDesign, BorderLayout.CENTER);
