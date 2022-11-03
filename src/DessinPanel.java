@@ -22,7 +22,7 @@ import java.util.ConcurrentModificationException;
 import javax.swing.JPanel;
 
 /**
- * @param DessinPanel2
+ * @param DessinPanel
  *            tableau contenant les coordonner de dessin a selectionner
  * @param formesGeo
  *            Tableau contenant les formes geometriques
@@ -30,28 +30,27 @@ import javax.swing.JPanel;
  *            lorsqu'un figure est selectionner
  * @param lastPointPress
  *            le point precedent
- * @param Toutselec
+ * @param toutSelec
  *            une facon pour faire la verification en cas ou on a selectionner
  *            ou nom voir mouseDragged
- * @param Toutselec
+ * @param toutSelec
  *            sert a montre si tout est selectionner une methode cree pour
  *            verifier
  * 
  */
-public class DessinPanel2 extends JPanel {
+public class DessinPanel extends JPanel {
 
 	private ArrayList<FormGeo> formesGeo;
 	private ArrayList<FormGeo> selectedFormesGeo;
 	private FormGeo courant;
 	private Point2D lastPointPress;
 	private FormGeo lastFormGeo = null;
-	private String lastFichier = ".";
-	private int Toutselec;
-	private int TAILLECARREE = 30;
+	private int toutSelec;
+	private int tailleCarre = 30;
 	private FormGeo.Type typeDeForme = FormGeo.Type.RECT;
 	private Object object;
 
-	public DessinPanel2() {
+	public DessinPanel() {
 		formesGeo = new ArrayList<FormGeo>();
 		selectedFormesGeo = new ArrayList<FormGeo>();
 		courant = null;
@@ -89,7 +88,7 @@ public class DessinPanel2 extends JPanel {
 	}
 
 	public void selectTout() {
-		Toutselec = 1;
+		toutSelec = 1;
 		selectedFormesGeo.clear();
 		selectedFormesGeo.addAll(formesGeo);
 		for (FormGeo f : selectedFormesGeo) {
@@ -124,6 +123,7 @@ public class DessinPanel2 extends JPanel {
 		return null;
 	}
 
+	@Override
 	public void paintComponent(Graphics g) {
 
 		super.paintComponent(g);
@@ -134,7 +134,7 @@ public class DessinPanel2 extends JPanel {
 				lightSquares(g2, courant);
 				repaint();
 			}
-			if (Toutselec == 1) {// TOUTSELEC EST UTILISER POUR
+			if (toutSelec == 1) {// toutSelec EST UTILISER POUR
 				for (FormGeo selec : selectedFormesGeo) {
 					lightSquares(g2, selec);
 					repaint();
@@ -179,6 +179,7 @@ public class DessinPanel2 extends JPanel {
 	// LORS LA SOURIS EST PRESSER
 
 	private class MouseHandler extends MouseAdapter {
+		@Override
 		public void mousePressed(MouseEvent event) {
 
 			Point p = event.getPoint();
@@ -189,14 +190,15 @@ public class DessinPanel2 extends JPanel {
 		}
 
 		// LORS DE CLIQUE DE LA SOURIS
+		@Override
 		public void mouseClicked(MouseEvent event) {
-			Toutselec = 0;
+			toutSelec = 0;
 			Point p = event.getPoint();
 			double x = p.getX();
 			double y = p.getY();
 			if (courant == null && lastFormGeo == null) {
-				FormGeo f = new FormGeo(typeDeForme, x - TAILLECARREE / 2, y
-						- TAILLECARREE / 2, TAILLECARREE, TAILLECARREE);
+				FormGeo f = new FormGeo(typeDeForme, x - tailleCarre / 2, y
+						- tailleCarre / 2, tailleCarre, tailleCarre);
 				f.setCouleur(FormGeo.getCouleurCourante());
 				add(f);
 			} else {
@@ -259,7 +261,7 @@ public class DessinPanel2 extends JPanel {
 
 					for (FormGeo f : selectedFormesGeo) {
 						f.moveBy(dx, dy);
-						if (Toutselec != 1) {
+						if (toutSelec != 1) {
 							// Pour arreter la selection de plusieur fichier
 							// et le deplacer en meme temp
 							// en cas ou on clique appui pas la touche
@@ -284,7 +286,7 @@ public class DessinPanel2 extends JPanel {
 					 *                modification n'est pas autorisée.
 					 */
 				} catch (ConcurrentModificationException e) {
-					Toutselec = 0;
+					toutSelec = 0;
 				}
 				lastPointPress = p;
 			}
@@ -324,10 +326,8 @@ public class DessinPanel2 extends JPanel {
 
 			object = in.readObject();
 			while (object != null) {
-				if (object != null) {
-					formesGeo.add((FormGeo) object);
-					object = in.readObject();
-				}
+				formesGeo.add((FormGeo) object);
+				object = in.readObject();
 			}
 			in.close();
 			repaint();
