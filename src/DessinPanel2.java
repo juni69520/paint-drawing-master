@@ -10,7 +10,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
@@ -20,9 +19,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
-
 import javax.swing.JPanel;
-import javax.swing.KeyStroke;
 
 /**
  * @param DessinPanel2
@@ -50,11 +47,9 @@ public class DessinPanel2 extends JPanel {
 	private FormGeo lastFormGeo = null;
 	private String lastFichier = ".";
 	private int Toutselec;
-	private Color couleur;
 	private int TAILLECARREE = 30;
 	private FormGeo.Type typeDeForme = FormGeo.Type.RECT;
 	private Object object;
-	private int touche;
 
 	public DessinPanel2() {
 		formesGeo = new ArrayList<FormGeo>();
@@ -62,15 +57,6 @@ public class DessinPanel2 extends JPanel {
 		courant = null;
 		addMouseListener(new MouseHandler());
 		addMouseMotionListener(new MouseMotionHandler());
-	}
-
-	// NON UTILISER POUR NOTRE PROGRAMME
-	public void setFichier(String n) {
-		lastFichier = n;
-	}
-
-	public String getFichier() {
-		return lastFichier;
 	}
 
 	// EFFACE TOUT
