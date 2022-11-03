@@ -23,6 +23,7 @@ class ColorComponent extends JComponent {
 		this.setMaximumSize(new Dimension(25, 25));
 	}
 
+    @Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D) g;
 		g2.setPaint(c);
