@@ -27,6 +27,10 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.KeyStroke;
 
+import xxxx.ColorComponent;
+import xxxx.DessinPanel;
+import xxxx.FormGeo;
+
 /**
  * 
  * @param DessinFrame

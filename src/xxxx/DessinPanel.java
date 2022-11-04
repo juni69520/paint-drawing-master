@@ -1,3 +1,4 @@
+package xxxx;
 /****************************************************************************
  * @author Josaphat Mayuba Ndele	et Andres Garcia Cotton					*					*
  * Les programmes permet a faire de dessin de forme rectanglulaire et 		*
